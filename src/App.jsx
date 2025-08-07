@@ -5,6 +5,7 @@ import Hero from "./components/Hero.jsx";
 import Lenis from "@studio-freight/lenis";
 import {useEffect, useRef} from "react";
 import Cocktails from "./components/Cocktails.jsx";
+import About from "./components/About.jsx";
 
 
 gsap.registerPlugin(ScrollTrigger)
@@ -39,6 +40,7 @@ const App = () => {
       <Navbar/>
       <Hero/>
       <Cocktails />
+      <About/>
 
 
     </main>
