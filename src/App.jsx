@@ -6,6 +6,7 @@ import Lenis from "@studio-freight/lenis";
 import {useEffect, useRef} from "react";
 import Cocktails from "./components/Cocktails.jsx";
 import About from "./components/About.jsx";
+import Art from "./components/Art.jsx";
 
 
 gsap.registerPlugin(ScrollTrigger)
@@ -41,6 +42,8 @@ const App = () => {
       <Hero/>
       <Cocktails />
       <About/>
+      <Art />
+      <div className="h-dvh"></div>
 
 
     </main>

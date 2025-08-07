@@ -10,14 +10,6 @@ const About = () => {
   useGSAP(()=>{
     const splitTitle = SplitText.create('#about h2', {type: "words"})
 
-
-    // ScrollTrigger.create({
-    //   trigger: '#about h2',
-    //   start: "bottom bottom",
-    //   animation: gsap.from(splitTitle.words, {
-    //     opacity: 0, stagger: 0.05, yPercent: 100, ease: "expo.out"})
-    // })
-
     gsap.timeline({
       scrollTrigger: {
         trigger: '#about h2',
