@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {sliderLists} from "../constants/index.js";
 import gsap from 'gsap'
 import {useGSAP} from "@gsap/react";
@@ -10,25 +10,23 @@ const Menu = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  useEffect(() => {
-    gsap.fromTo(imgRef.current, {
-      xPercent: -100,
-      duration: 1
-    }, {
-      xPercent: 0
-    })
-  }, [currentIndex]);
+
 
   const goToSlide = (index) => {
     const newIndex = (index + sliderLists.length) % sliderLists.length
     setCurrentIndex(newIndex)
 
-    // gsap.fromTo(imgRef.current, {
-    //   xPercent: -100,
-    //   duration: 1
-    // }, {
-    //   xPercent: 0
-    // })
+
+
+
+
+    gsap.fromTo(imgRef.current, {
+      xPercent: -100,
+      duration: 1,
+      delay: .5
+    }, {
+      xPercent: 0
+    })
 
     gsap.fromTo("#title", {
       opacity: 0,
