@@ -14,8 +14,10 @@ const Menu = () => {
   useEffect(() => {
     if (!imgRef.current) return;
 
+    //gsap.set(imgRef.current, {opacity: 1})
     gsap.fromTo(imgRef.current, {
-      xPercent: -100,
+      opacity: 1,
+      xPercent: -100,      
     }, {
       xPercent: 0,
       duration: 1,
@@ -27,6 +29,7 @@ const Menu = () => {
   const goToSlide = (index) => {
     const newIndex = (index + sliderLists.length) % sliderLists.length
     setCurrentIndex(newIndex)
+    gsap.set(imgRef.current, {opacity: 0})
 
 
 
@@ -90,6 +93,12 @@ const Menu = () => {
           })
         }
       </nav>
+
+      {
+        <ul className="sr-only">
+          {sliderLists.map(slide => <img src={slide.img} alt=""/>)}
+        </ul>
+      }
 
       <div className="content">
 
