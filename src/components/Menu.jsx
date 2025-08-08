@@ -11,18 +11,45 @@ const Menu = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
 
-  useEffect(() => {
-    if (!imgRef.current) return;
+  // useEffect(() => {
+  //   if (!imgRef.current) return;
+  //
+  //   gsap.fromTo(imgRef.current, {
+  //     opacity: 1,
+  //     xPercent: -100,
+  //   }, {
+  //     xPercent: 0,
+  //     duration: 1,
+  //     ease: "power3.out",
+  //   });
+  // }, [currentIndex]);
 
-    //gsap.set(imgRef.current, {opacity: 1})
-    gsap.fromTo(imgRef.current, {
-      opacity: 1,
-      xPercent: -100,      
-    }, {
-      xPercent: 0,
-      duration: 1,
-      ease: "power3.out",
-    });
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img) return;
+
+    function onLoad() {
+      gsap.fromTo(img, {
+        opacity: 1,
+        xPercent: -100,
+      }, {
+        xPercent: 0,
+        duration: 1,
+        ease: "power3.out",
+      });
+    }
+
+    // Если картинка уже загружена (кэш), сразу запускаем
+    if (img.complete) {
+      onLoad();
+    } else {
+      img.addEventListener('load', onLoad);
+    }
+
+    return () => {
+      img.removeEventListener('load', onLoad);
+    };
   }, [currentIndex]);
 
 
@@ -32,15 +59,6 @@ const Menu = () => {
     gsap.set(imgRef.current, {opacity: 0})
 
 
-
-
-    //
-    // gsap.fromTo(imgRef.current, {
-    //   xPercent: -100,
-    //   duration: 1,
-    // }, {
-    //   xPercent: 0
-    // })
 
     gsap.fromTo("#title", {
       opacity: 0,
