@@ -73,10 +73,6 @@ const Hero = () => {
       })
     }
 
-
-
-
-
   })
 
   return (
@@ -108,7 +104,7 @@ const Hero = () => {
       </section>
 
       <div className="video absolute inset-0">
-        <video ref={videoRef} src="/videos/output.mp4" muted playsInline preload='auto'></video>
+        <video ref={videoRef} src="/videos/output.mp4" muted playsInline preload='auto' muted ></video>
       </div>
     </>
   );
