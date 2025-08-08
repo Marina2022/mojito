@@ -14,9 +14,6 @@ const Menu = () => {
     const newIndex = (index + sliderLists.length) % sliderLists.length
     setCurrentIndex(newIndex)
 
-  }
-
-  useGSAP(() => {
     gsap.fromTo(imgRef.current, {
       xPercent: -100,
       duration: 1
@@ -37,12 +34,10 @@ const Menu = () => {
       },
       {
         opacity: 1,
-        yPercent: 0
+        yPercent: 100
       }
     )
-
-  }, [currentIndex])
-
+  }
 
   const getCocktailAt = (indexOffset) => {
     return sliderLists[(indexOffset + currentIndex + sliderLists.length) % sliderLists.length]
