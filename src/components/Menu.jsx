@@ -50,7 +50,7 @@ const Menu = () => {
 
   return (
     <section id="menu">
-      <img src="/images/slider-left-leaf.png" alt="left-leaf" id="m-left-leaf"/>
+      {/*<img src="/images/slider-left-leaf.png" alt="left-leaf" id="m-left-leaf"/>*/}
       <img src="/images/slider-right-leaf.png" alt="right-leaf" id="m-right-leaf"/>
 
       <h2 id="menu-heading" className="sr-only">
