@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {sliderLists} from "../constants/index.js";
 import gsap from 'gsap'
 import {useGSAP} from "@gsap/react";
@@ -10,16 +10,25 @@ const Menu = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const goToSlide = (index) => {
-    const newIndex = (index + sliderLists.length) % sliderLists.length
-    setCurrentIndex(newIndex)
-
+  useEffect(() => {
     gsap.fromTo(imgRef.current, {
       xPercent: -100,
       duration: 1
     }, {
       xPercent: 0
     })
+  }, [currentIndex]);
+
+  const goToSlide = (index) => {
+    const newIndex = (index + sliderLists.length) % sliderLists.length
+    setCurrentIndex(newIndex)
+
+    // gsap.fromTo(imgRef.current, {
+    //   xPercent: -100,
+    //   duration: 1
+    // }, {
+    //   xPercent: 0
+    // })
 
     gsap.fromTo("#title", {
       opacity: 0,
@@ -50,7 +59,6 @@ const Menu = () => {
 
   return (
     <section id="menu">
-      {/*<img src="/images/slider-left-leaf.png" alt="left-leaf" id="m-left-leaf"/>*/}
       <img src="/images/slider-right-leaf.png" alt="right-leaf" id="m-right-leaf"/>
 
       <h2 id="menu-heading" className="sr-only">
@@ -89,7 +97,7 @@ const Menu = () => {
         </div>
 
         <div className="cocktail">
-          <img ref={imgRef} src={currentCocktail.image} alt="cicktail" className="object-contain"/>
+          <img ref={imgRef} src={currentCocktail.image} alt="cicktail" className="object-contain "/>
         </div>
 
         <div className="recipe">
