@@ -67,7 +67,17 @@ const Hero = () => {
           scrub: 1,
           pin: true,
           onUpdate: (self) => {
-            videoRef.current.currentTime = self.progress * videoRef.current.duration;
+            // videoRef.current.currentTime = self.progress * videoRef.current.duration;
+
+            const video = videoRef.current;
+            if (!video) return;
+
+            video.currentTime = self.progress * video.duration;
+            // Попробуем запустить
+            video.play().catch(() => {
+              // В iOS может быть запрет, игнорируем ошибку
+            });
+
           }
         }
       })
@@ -104,7 +114,7 @@ const Hero = () => {
       </section>
 
       <div className="video absolute inset-0">
-        <video ref={videoRef} src="/videos/output.mp4" muted playsInline preload='auto' muted ></video>
+        <video ref={videoRef} src="/videos/output.mp4" muted playsInline preload='auto' ></video>
       </div>
     </>
   );
