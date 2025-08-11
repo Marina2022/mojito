@@ -58,30 +58,61 @@ const Hero = () => {
     })
 
 
+    // videoRef.current.onloadedmetadata = () => {
+    //   gsap.to(videoRef.current, {
+    //     scrollTrigger: {
+    //       trigger: videoRef.current,
+    //       start: isMobile ? "top 50%" : "center 60%",
+    //       end: isMobile ? "120% top" : "bottom top",
+    //       scrub: 1,
+    //       pin: true,
+    //       onUpdate: (self) => {
+    //         // videoRef.current.currentTime = self.progress * videoRef.current.duration;
+    //
+    //         const video = videoRef.current;
+    //         if (!video) return;
+    //
+    //         video.currentTime = self.progress * video.duration;
+    //         // Попробуем запустить
+    //         video.play().catch(() => {
+    //           // В iOS может быть запрет, игнорируем ошибку
+    //         });
+    //
+    //       }
+    //     }
+    //   })
+    // }
+
     videoRef.current.onloadedmetadata = () => {
-      gsap.to(videoRef.current, {
+      const video = videoRef.current;
+      if (!video) return;
+
+      // Проверка на iOS
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+      if (isIOS) {
+        video.play().catch(() => {
+          // Игнорируем ошибку автозапуска на iOS, если пользователь ещё не взаимодействовал
+        });
+      }
+
+      gsap.to(video, {
         scrollTrigger: {
-          trigger: videoRef.current,
+          trigger: video,
           start: isMobile ? "top 50%" : "center 60%",
           end: isMobile ? "120% top" : "bottom top",
           scrub: 1,
           pin: true,
           onUpdate: (self) => {
-            // videoRef.current.currentTime = self.progress * videoRef.current.duration;
-
-            const video = videoRef.current;
-            if (!video) return;
-
             video.currentTime = self.progress * video.duration;
-            // Попробуем запустить
-            video.play().catch(() => {
-              // В iOS может быть запрет, игнорируем ошибку
-            });
-
+            // Подстраховка — запускаем видео на апдейте, если оно не играет
+            if (isIOS && video.paused) {
+              video.play().catch(() => {});
+            }
           }
         }
-      })
-    }
+      });
+    };
 
   })
 

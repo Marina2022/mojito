@@ -73,7 +73,7 @@ const Menu = () => {
       },
       {
         opacity: 1,
-        yPercent: 100
+        yPercent: 0
       }
     )
   }
